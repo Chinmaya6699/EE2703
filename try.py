@@ -14,18 +14,25 @@ def analyse(line):
 	print("Analysis")
 	words = line.split() #words is a list containing each entry of the MNA matrix
 	source = words[0][0] #source contains the letter code indicating type of element
-	if(len(words)>4): #if it is a dependent source
+	if(len(words)==6): #if it is a dependent source
 		print("Dependent source")
 		maps = {"E": ["VCVS",1,2,3,4,5], #maps is a dictionary containing the type of element and indexes of the nodes and values
-			"G": ["VCCS",1,2,3,4,5], 
-			"H": ["CCVS",1,2,4,5,6], 
-			"F": ["CCCS",1,2,4,5,6]}
-		print("%s\nControlling nodes: %s and %s\nControlled nodes: %s and %s\nValue: %s\n" % (maps[source][0],
-													words[maps[source][1]],
-													words[maps[source][2]],
-													words[maps[source][3]],
-													words[maps[source][4]],
-													words[maps[source][5]]))
+			"G": ["VCCS",1,2,3,4,5]}
+		print("%s\nNode 1: %s\nNode 2: %s\nNode 3: %s\nNode 4: %s\nValue: %s\n" % (maps[source][0],
+												words[maps[source][1]],
+												words[maps[source][2]],
+												words[maps[source][3]],
+												words[maps[source][4]],
+												words[maps[source][5]]))
+	elif(len(words)==5): #for ccvs and cccs
+		print("Dependent source")
+		maps = {"H": ["CCVS",1,2,3,4], 
+			"F": ["CCCS",1,2,3,4]}
+		print("%s\nNode 1: %s\nNode 2: %s\nVoltage source: %s\nValue: %s\n" % (maps[source][0],
+											words[maps[source][1]],
+											words[maps[source][2]],
+											words[maps[source][3]],
+											words[maps[source][4]]))
 
 	else: #in the case of an independent element
 		maps = {"R": "Resistor",
